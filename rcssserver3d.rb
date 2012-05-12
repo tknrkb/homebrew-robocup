@@ -8,15 +8,15 @@ class Rcssserver3d < Formula
   url 'http://downloads.sourceforge.net/project/simspark/rcssserver3d/0.6.5/rcssserver3d-0.6.5.tar.gz'
   md5 'cd2dba0db079859f252a12715ceafab1'
 
-  # depends_on 'cmake' => :build
+  depends_on 'simspark'
 
   def install
     # ENV.x11 # if your formula requires any X11 headers
     # ENV.j1  # if your formula's build system can't parallelize
 
-    system "./configure", "--disable-debug", "--disable-dependency-tracking",
-                          "--prefix=#{prefix}"
-    # system "cmake . #{std_cmake_parameters}"
+    #system "./configure", "--disable-debug", "--disable-dependency-tracking",
+    #                      "--prefix=#{prefix}"
+    system "cmake . #{std_cmake_parameters}"
     system "make install" # if this fails, try separate make/make install steps
   end
 
