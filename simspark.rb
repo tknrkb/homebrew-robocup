@@ -35,7 +35,7 @@ class Simspark < Formula
 
     #system "./configure", "--disable-debug", "--disable-dependency-tracking",
     #                      "--prefix=#{prefix}"
-    system "cmake . #{std_cmake_parameters}"
+    system "cmake . #{std_cmake_parameters} -DUSE_COREFOUNDATION=OFF"
     system "make install" # if this fails, try separate make/make install steps
   end
 
