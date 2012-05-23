@@ -5,8 +5,8 @@ require 'formula'
 
 class Rcssserver3d < Formula
   homepage ''
-  url 'http://downloads.sourceforge.net/project/simspark/rcssserver3d/0.6.5/rcssserver3d-0.6.5.tar.gz'
-  md5 'cd2dba0db079859f252a12715ceafab1'
+  url 'http://downloads.sourceforge.net/project/simspark/rcssserver3d/0.6.6/rcssserver3d-0.6.6.tar.gz'
+  md5 '4d560e409700a869a8477b705cbb14c1'
 
   depends_on 'simspark'
 
@@ -16,7 +16,7 @@ class Rcssserver3d < Formula
 
     #system "./configure", "--disable-debug", "--disable-dependency-tracking",
     #                      "--prefix=#{prefix}"
-    system "cmake . #{std_cmake_parameters}"
+    system "cmake . #{std_cmake_parameters} -DUSE_COREFOUNDATION=OFF"
     system "make install" # if this fails, try separate make/make install steps
   end
 

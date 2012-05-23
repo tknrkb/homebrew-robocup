@@ -5,8 +5,8 @@ require 'formula'
 
 class Simspark < Formula
   homepage ''
-  url 'http://downloads.sourceforge.net/project/simspark/simspark/0.2.2/simspark-0.2.2.tar.gz'
-  md5 'b93320a0c6794766cab6bd37b6081d12'
+  url 'http://downloads.sourceforge.net/project/simspark/simspark/0.2.3/simspark-0.2.3.tar.gz'
+  md5 'b653af47b014b0af99d5dda1e3949d7b'
 
   depends_on 'cmake' => :build
   #find_package(Ruby REQUIRED)
@@ -48,32 +48,29 @@ class Simspark < Formula
 end
 
 __END__
-*** a/lib/salt/gmath.h	2012-05-12 23:38:09.000000000 +0900
---- b/lib/salt/gmath.h	2012-05-12 23:39:07.000000000 +0900
+*** a/lib/salt/gmath.h	2012-05-23 21:44:40.000000000 +0900
+--- b/lib/salt/gmath.h	2012-05-23 21:51:22.000000000 +0900
 ***************
-*** 28,33 ****
---- 28,34 ----
-  
+*** 29,34 ****
+--- 29,38 ----
   #include "defines.h"
   #include <cmath>
-+ #include <boost/math/special_functions/fpclassify.hpp>
   
++ #ifdef __APPLE__
++ #include <boost/math/special_functions/fpclassify.hpp>
++ #endif
++ 
   #ifdef WIN32
   #include <float.h>
+  #include <limits>
 ***************
-*** 226,232 ****
+*** 225,230 ****
+--- 229,236 ----
+      // isfinite is part of C99 but not available in Visual C++
       assert(std::numeric_limits<TYPE>::has_infinity);
       return (std::numeric_limits<double>::infinity() != f);
++ #elif __APPLE__
++     return boost::math::isfinite(f);
   #else
-!     return isfinite(f);
+      return std::isfinite(f);
   #endif
-  }
-  
---- 227,233 ----
-      assert(std::numeric_limits<TYPE>::has_infinity);
-      return (std::numeric_limits<double>::infinity() != f);
-  #else
-!     return boost::math::isfinite(f);
-  #endif
-  }
-  
